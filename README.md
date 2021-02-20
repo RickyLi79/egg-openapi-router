@@ -28,11 +28,11 @@ exports.openapiRouter = {
 }
 ```
 
-#### Edit your own configurations in `conifg/config.{env}.js`
+#### Edit your own configurations in `config/config.{env}.js`
 
 - Single config
   ```js
-  // conifg/config.{env}.js
+  // config/config.{env}.js
   exports.openapiRouter = {
     config: {
       controllerDir: 'my/api/dir', // default: ''
@@ -43,7 +43,7 @@ exports.openapiRouter = {
   ```
 - Muti Configs
   ```js
-  // conifg/config.{env}.js
+  // config/config.{env}.js
   exports.openapiRouter = {
     configs: {
       'my/api/module/1': {
@@ -72,9 +72,9 @@ paths:
           description: ok
 ```
 
-#### edit `conifg/config.{env}.js`:
+#### edit `config/config.{env}.js`:
 ```js
-// conifg/config.{env}.js
+// config/config.{env}.js
 exports.openapiRouter = {
   config: {
     controllerDir: '', 
