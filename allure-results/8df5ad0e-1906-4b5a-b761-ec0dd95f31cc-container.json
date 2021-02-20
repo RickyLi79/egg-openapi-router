@@ -1,1 +1,0 @@
-{"uuid":"8df5ad0e-1906-4b5a-b761-ec0dd95f31cc","children":["d5e58c8e-376f-499d-aa1e-229b81a3b799"],"befores":[{"status":"broken","statusDetails":{},"stage":"pending","steps":[],"attachments":[],"parameters":[]}],"afters":[{"status":"passed","statusDetails":{},"stage":"finished","steps":[],"attachments":[],"parameters":[]}],"name":"test/openapi-router.test.ts"}

@@ -1,1 +1,0 @@
-{"uuid":"85867205-adb8-4cab-a4f6-2f4e3bbe1679","children":["146dbc57-5d44-467c-9814-bc8fe080ab28"],"befores":[{"status":"broken","statusDetails":{},"stage":"pending","steps":[],"attachments":[],"parameters":[]}],"afters":[{"status":"passed","statusDetails":{},"stage":"finished","steps":[],"attachments":[],"parameters":[]}],"name":"OpenapiRouter: create"}
