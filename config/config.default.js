@@ -6,7 +6,7 @@ const types_1 = require("../lib/types");
 exports.default = (appInfo) => {
     const openapiRouter = {
         config: {
-            controllerDir: path.join(appInfo.baseDir, 'app', 'controller'),
+            controllerDir: '',
             docsDir: path.join(appInfo.baseDir, 'openapi-doc'),
             routerPrefix: '',
         },

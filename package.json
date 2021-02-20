@@ -1,7 +1,10 @@
 {
   "name": "egg-openapi-router",
-  "version": "1.0.0",
-  "description": "",
+  "version": "1.0.1",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "[@rickyli79/koa-openapi-router](https://github.com/RickyLi79/koa-openapi-router) plugin for Egg.js.",
   "egg": {
     "typescript": true,
     "declarations": true
