@@ -11,13 +11,7 @@ export default class implements IBoot {
   }
 
   public async willReady() {
-    //
     await this.initOpenapiRouter();
-  }
-
-  public async didReady() {
-    //
-    this.app;
   }
 
   private async initOpenapiRouter() {
