@@ -1,33 +1,338 @@
-# hackernews-async-ts
+# egg-openapi-router
 
-[Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
+[@rickyli79/koa-openapi-router](https://github.com/RickyLi79/koa-openapi-router) plugin for Egg.js.
 
-## QuickStart
+> NOTE: This plugin just for [@rickyli79/koa-openapi-router](https://github.com/RickyLi79/koa-openapi-router) plugin for Egg.js, more documentation please visit https://github.com/RickyLi79/koa-openapi-router.
 
-### Development
+[![NPM version][npm-image]][npm-url]
+[![npm download][download-image]][download-url]
 
-```bash
-$ npm i
-$ npm run dev
-$ open http://localhost:7001/
-```
+[npm-image]: https://img.shields.io/npm/v/egg-openapi-router.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/egg-openapi-router
+[download-image]: https://img.shields.io/npm/dm/egg-openapi-router.svg?style=flat-square
+[download-url]: https://npmjs.org/package/egg-openapi-router
 
-Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
-
-### Deploy
+## Install
 
 ```bash
-$ npm run tsc
-$ npm start
+$ npm i --save egg-openapi-router
 ```
 
-### Npm Scripts
+## Usage & configuration
 
-- Use `npm run lint` to check code style
-- Use `npm test` to run unit test
-- se `npm run clean` to clean compiled js at development mode once
+- Enable plugin in `config/plugin.js`
 
-### Requirement
+``` js
+exports.openapiRouter = {
+  enable: true,
+  package: 'egg-openapi-router'
+}
+```
 
-- Node.js 8.x
-- Typescript 2.8+
+- Edit your own configurations in `conif/config.{env}.js`
+
+```js
+exports.openapiRouter = {
+  
+};
+```
+
+You can also use the `connection uri` to configure the connection:
+
+```js
+exports.sequelize = {
+  dialect: 'mysql', // support: mysql, mariadb, postgres, mssql
+  connectionUri: 'mysql://root:@127.0.0.1:3306/test',
+  // delegate: 'myModel', // load all models to `app[delegate]` and `ctx[delegate]`, default to `model`
+  // baseDir: 'my_model', // load all files in `app/${baseDir}` as models, default to `model`
+  // exclude: 'index.js', // ignore `app/${baseDir}/index.js` when load models, support glob and array
+  // more sequelize options
+};
+```
+
+egg-sequelize has a default sequelize options below
+
+```js
+{
+    delegate: 'model',
+    baseDir: 'model',
+    logging(...args) {
+      // if benchmark enabled, log used
+      const used = typeof args[1] === 'number' ? `[${args[1]}ms]` : '';
+      app.logger.info('[egg-sequelize]%s %s', used, args[0]);
+    },
+    host: 'localhost',
+    port: 3306,
+    username: 'root',
+    benchmark: true,
+    define: {
+      freezeTableName: false,
+      underscored: true,
+    },
+  };
+```
+
+More documents please refer to [Sequelize.js](http://docs.sequelizejs.com/manual/installation/usage.html)
+
+## Model files
+
+Please put models under `app/model` dir by default.
+
+## Conventions
+
+| model file       | class name              |
+| ---------------- | ----------------------- |
+| `user.js`        | `app.model.User`        |
+| `person.js`      | `app.model.Person`      |
+| `user_group.js`  | `app.model.UserGroup`   |
+| `user/profile.js`| `app.model.User.Profile`|
+
+- Tables always has timestamp fields: `created_at datetime`, `updated_at datetime`.
+- Use underscore style column name, for example: `user_id`, `comments_count`.
+
+## Examples
+
+### Standard
+
+Define a model first.
+
+> NOTE: `options.delegate` default to `model`, so `app.model` is an [Instance of Sequelize](http://docs.sequelizejs.com/class/lib/sequelize.js~Sequelize.html#instance-constructor-constructor), so you can use methods like: `app.model.sync, app.model.query ...`
+
+```js
+// app/model/user.js
+
+module.exports = app => {
+  const { STRING, INTEGER, DATE } = app.Sequelize;
+
+  const User = app.model.define('user', {
+    login: STRING,
+    name: STRING(30),
+    password: STRING(32),
+    age: INTEGER,
+    last_sign_in_at: DATE,
+    created_at: DATE,
+    updated_at: DATE,
+  });
+
+  User.findByLogin = async function(login) {
+    return await this.findOne({
+      where: {
+        login: login
+      }
+    });
+  }
+
+  // don't use arraw function
+  User.prototype.logSignin = async function() {
+    return await this.update({ last_sign_in_at: new Date() });
+  }
+
+  return User;
+};
+
+```
+
+Now you can use it in your controller:
+
+```js
+// app/controller/user.js
+class UserController extends Controller {
+  async index() {
+    const users = await this.ctx.model.User.findAll();
+    this.ctx.body = users;
+  }
+
+  async show() {
+    const user = await this.ctx.model.User.findByLogin(this.ctx.params.login);
+    await user.logSignin();
+    this.ctx.body = user;
+  }
+}
+```
+
+### Associate
+
+Define all your associations in `Model.associate()` and egg-sequelize will execute it after all models loaded. See example below.
+
+### Multiple Datasources
+
+egg-sequelize support load multiple datasources independently. You can use `config.sequelize.datasources` to configure and load multiple datasources.
+
+```js
+// config/config.default.js
+exports.sequelize = {
+  datasources: [
+    {
+      delegate: 'model', // load all models to app.model and ctx.model
+      baseDir: 'model', // load models from `app/model/*.js`
+      database: 'biz',
+      // other sequelize configurations
+    },
+    {
+      delegate: 'admninModel', // load all models to app.adminModel and ctx.adminModel
+      baseDir: 'admin_model', // load models from `app/admin_model/*.js`
+      database: 'admin',
+      // other sequelize configurations
+    },
+  ],
+};
+```
+
+Then we can define model like this:
+
+```js
+// app/model/user.js
+module.exports = app => {
+  const { STRING, INTEGER, DATE } = app.Sequelize;
+
+  const User = app.model.define('user', {
+    login: STRING,
+    name: STRING(30),
+    password: STRING(32),
+    age: INTEGER,
+    last_sign_in_at: DATE,
+    created_at: DATE,
+    updated_at: DATE,
+  });
+
+  return User;
+};
+
+// app/admin_model/user.js
+module.exports = app => {
+  const { STRING, INTEGER, DATE } = app.Sequelize;
+
+  const User = app.adminModel.define('user', {
+    login: STRING,
+    name: STRING(30),
+    password: STRING(32),
+    age: INTEGER,
+    last_sign_in_at: DATE,
+    created_at: DATE,
+    updated_at: DATE,
+  });
+
+  return User;
+};
+```
+
+If you define the same model for different datasource, the same model file will be excute twice for different database, so we can use the secound argument to get the sequelize instance:
+
+```js
+// app/model/user.js
+// if this file will load multiple times for different datasource
+// we can use the secound argument to get the sequelize instance
+module.exports = (app, model) => {
+  const { STRING, INTEGER, DATE } = app.Sequelize;
+
+  const User = model.define('user', {
+    login: STRING,
+    name: STRING(30),
+    password: STRING(32),
+    age: INTEGER,
+    last_sign_in_at: DATE,
+    created_at: DATE,
+    updated_at: DATE,
+  });
+
+  return User;
+};
+```
+
+### Customize Sequelize
+
+By default, egg-sequelize will use sequelize@5, you can cusomize sequelize version by pass sequelize instance with `config.sequelize.Sequelize` like this:
+
+```js
+// config/config.default.js
+exports.sequelize = {
+  Sequelize: require('sequelize'),
+};
+```
+
+### Full example
+
+```js
+// app/model/post.js
+
+module.exports = app => {
+  const { STRING, INTEGER, DATE } = app.Sequelize;
+
+  const Post = app.model.define('Post', {
+    name: STRING(30),
+    user_id: INTEGER,
+    created_at: DATE,
+    updated_at: DATE,
+  });
+
+  Post.associate = function() {
+    app.model.Post.belongsTo(app.model.User, { as: 'user' });
+  }
+
+  return Post;
+};
+```
+
+
+```js
+// app/controller/post.js
+class PostController extends Controller {
+  async index() {
+    const posts = await this.ctx.model.Post.findAll({
+      attributes: [ 'id', 'user_id' ],
+      include: { model: this.ctx.model.User, as: 'user' },
+      where: { status: 'publish' },
+      order: 'id desc',
+    });
+
+    this.ctx.body = posts;
+  }
+
+  async show() {
+    const post = await this.ctx.model.Post.findByPk(this.params.id);
+    const user = await post.getUser();
+    post.setDataValue('user', user);
+    this.ctx.body = post;
+  }
+
+  async destroy() {
+    const post = await this.ctx.model.Post.findByPk(this.params.id);
+    await post.destroy();
+    this.ctx.body = { success: true };
+  }
+}
+```
+
+## Sync model to db
+
+**We strongly recommend you to use [Sequelize - Migrations](http://docs.sequelizejs.com/manual/tutorial/migrations.html) to create or migrate database.**
+
+**This code should only be used in development.**
+
+```js
+// {app_root}/app.js
+module.exports = app => {
+  if (app.config.env === 'local' || app.config.env === 'unittest') {
+    app.beforeStart(async () => {
+      await app.model.sync({force: true});
+    });
+  }
+};
+```
+
+## Migration
+
+Using [sequelize-cli](https://github.com/sequelize/cli) to help manage your database, data structures and seed data. Please read [Sequelize - Migrations](http://docs.sequelizejs.com/manual/tutorial/migrations.html) to learn more infomations.
+
+## Recommended example
+
+- https://github.com/eggjs/examples/tree/master/sequelize/
+
+## Questions & Suggestions
+
+Please open an issue [here](https://github.com/eggjs/egg/issues).
+
+## License
+
+[MIT](LICENSE)
+

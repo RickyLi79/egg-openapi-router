@@ -14,7 +14,6 @@ export default (appInfo: EggAppInfo) => {
   // logger.consoleLevel = 'ALL';
   // logger.level = 'ALL';
 
-
   // the return config will combines to EggAppConfig
   return config;
 };
