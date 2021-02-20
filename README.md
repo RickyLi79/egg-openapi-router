@@ -1,9 +1,4 @@
 # egg-openapi-router
-
-[@rickyli79/koa-openapi-router](https://github.com/RickyLi79/koa-openapi-router) plugin for Egg.js.
-
-> NOTE: This plugin just for [@rickyli79/koa-openapi-router](https://github.com/RickyLi79/koa-openapi-router) plugin for Egg.js, more documentation please visit https://github.com/RickyLi79/koa-openapi-router.
-
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
 
@@ -11,6 +6,11 @@
 [npm-url]: https://npmjs.org/package/egg-openapi-router
 [download-image]: https://img.shields.io/npm/dm/egg-openapi-router.svg?style=flat-square
 [download-url]: https://npmjs.org/package/egg-openapi-router
+
+
+[@rickyli79/koa-openapi-router](https://github.com/RickyLi79/koa-openapi-router) plugin for Egg.js.
+
+> NOTE: This plugin just for [@rickyli79/koa-openapi-router](https://github.com/RickyLi79/koa-openapi-router) plugin for Egg.js, more documentation please visit https://github.com/RickyLi79/koa-openapi-router.
 
 ## Install
 
@@ -31,11 +31,15 @@ exports.openapiRouter = {
 
 - Edit your own configurations in `conif/config.{env}.js`
 
-```js
-exports.openapiRouter = {
+  - Single config
+    ```js
+    exports.openapiRouter = {
+      config : {
 
-};
-```
+      }
+    };
+    ```
+  - Muti Configg
 
 You can also use the `connection uri` to configure the connection:
 
