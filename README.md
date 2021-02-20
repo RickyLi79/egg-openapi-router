@@ -33,7 +33,7 @@ exports.openapiRouter = {
 
 ```js
 exports.openapiRouter = {
-  
+
 };
 ```
 
