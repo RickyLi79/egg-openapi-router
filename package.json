@@ -1,6 +1,6 @@
 {
   "name": "egg-openapi-router",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "publishConfig": {
     "access": "public"
   },
@@ -79,5 +79,8 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/RickyLi79/egg-openapi-router.git"
-  }
+  },
+  "categories": [
+    "Programming Languages"
+  ]
 }

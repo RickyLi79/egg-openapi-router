@@ -1,6 +1,7 @@
 # egg-openapi-router
 [![NPM version][npm-image]][npm-url]
 [![npm download][download-image]][download-url]
+![NPM](https://img.shields.io/npm/l/egg-openapi-router?style=flat-square)
 
 [npm-image]: https://img.shields.io/npm/v/egg-openapi-router.svg?style=flat-square
 [npm-url]: https://npmjs.org/package/egg-openapi-router

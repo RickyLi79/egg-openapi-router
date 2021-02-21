@@ -12,18 +12,28 @@ class default_1 {
     async initOpenapiRouter() {
         const logger = this.app.getLogger(types_1.OPENAPI_ROUTER_LOGGER);
         const configs = [];
-        if (this.app.config.openapiRouter.config) {
-            configs.push(this.app.config.openapiRouter.config);
+        const config = this.app.config.openapiRouter;
+        if (config.config) {
+            configs.push(config.config);
         }
-        if (this.app.config.openapiRouter.configs) {
-            const cfgs = this.app.config.openapiRouter.configs;
+        if (config.configs) {
+            const cfgs = config.configs;
             for (const iConfigKey in cfgs) {
                 const iConfig = cfgs[iConfigKey];
                 iConfig.routerPrefix = iConfigKey;
                 configs.push(iConfig);
             }
         }
-        await koa_openapi_router_1.OpenapiRouter.Start(this.app, configs, { logger, isEggApp: true });
+        let proxyAction;
+        if (config.proxyAction) {
+            const paths = config.proxyAction.split('/');
+            proxyAction = this.app.middleware;
+            for (const iPath of paths) {
+                proxyAction = proxyAction[iPath];
+            }
+            proxyAction = this.app.middleware[config.proxyAction];
+        }
+        await koa_openapi_router_1.OpenapiRouter.Start(this.app, configs, { logger, isEggApp: true, proxyAction });
     }
 }
 exports.default = default_1;
