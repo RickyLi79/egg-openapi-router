@@ -101,6 +101,9 @@ module.exports = DefaultController;
 
 > More documentation please visit https://github.com/RickyLi79/koa-openapi-router.
 
+#### Test Report
+[Allure Report](https://rickyli79.github.io/testing-reports/egg-openapi-router/allure-report/)
+
 ## License
 
 [MIT](LICENSE)
