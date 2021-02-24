@@ -11,11 +11,11 @@ logs/
 !.autod.conf.js
 
 app/**/*.map
-# app/**/*.js
+app/**/*.js
 config/**/*.map
-# config/**/*.js
-# lib/**/*.js
-# app.js
+config/**/*.js
+lib/**/*.js
+app.js
 
 allure-report/
 allure-results/
