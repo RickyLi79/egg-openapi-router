@@ -10,23 +10,24 @@
     "charset": "utf8",
     "allowJs": false,
     "pretty": true,
-    "noEmitOnError": false,
-    // "noUnusedLocals": false,
-    // "noUnusedParameters": true,
-    // "allowUnreachableCode": false,
-    // "allowUnusedLabels": false,
-    "strictPropertyInitialization": false,
-    // "noFallthroughCasesInSwitch": true,
+    "noEmitOnError": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "allowUnreachableCode": true,
+    "allowUnusedLabels": true,
+    "strictPropertyInitialization": true,
+    "noFallthroughCasesInSwitch": true,
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     // "inlineSourceMap": true,
     "importHelpers": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
   },
   "exclude": [
-    "node_modules*",
-    "node_modules/@*",
-    "allure.test",
-    "test"
+    "node_modules/",
+    "allure.test/",
+    "test/",
+    "typings/",
+    
   ]
 }

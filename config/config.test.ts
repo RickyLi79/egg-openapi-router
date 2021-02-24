@@ -15,7 +15,7 @@ export default () => {
   const config: PowerPartial<EggAppConfig> = {};
   config.customLogger = {};
   config.customLogger[OPENAPI_ROUTER_LOGGER] = {
-    level: 'ALL',
+    consoleLevel: 'ALL',
   };
   return { ...config, openapiRouter };
 };

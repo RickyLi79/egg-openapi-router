@@ -15,6 +15,7 @@ export default (appInfo: EggAppInfo): { openapiRouter: IEggOpenapiRouterConfig }
   config.customLogger = {};
   config.customLogger[OPENAPI_ROUTER_LOGGER] = {
     file: path.join(appInfo.root, 'logs', appInfo.name, 'egg-openapi-router.log'),
+    level: 'ALL',
   };
 
   return { ...config, openapiRouter };

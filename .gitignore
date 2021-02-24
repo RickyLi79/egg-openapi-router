@@ -10,10 +10,12 @@ logs/
 *.lock
 !.autod.conf.js
 
-test/**/*.js
 app/**/*.map
-test/**/*.map
+# app/**/*.js
 config/**/*.map
+# config/**/*.js
+# lib/**/*.js
+# app.js
 
 allure-report/
 allure-results/
