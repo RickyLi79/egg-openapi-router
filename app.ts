@@ -38,7 +38,7 @@ export default class implements IBoot {
       }
       proxyAction = this.app.middleware[config.proxyAction];
     }
-    await OpenapiRouter.Start(this.app, configs, { logger, isEggApp: true, proxyAction });
+    await OpenapiRouter.Start(this.app, configs, { logger, isEggApp: true, proxyAction, testMode: config.testMode });
   }
 
 }

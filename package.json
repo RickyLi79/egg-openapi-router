@@ -1,6 +1,6 @@
 {
   "name": "egg-openapi-router",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "publishConfig": {
     "access": "public"
   },
@@ -37,7 +37,7 @@
     "allure:test": "npm run allure:clean && egg-bin test test/**/*.allure.ts"
   },
   "dependencies": {
-    "@rickyli79/koa-openapi-router": "^1.1.11",
+    "@rickyli79/koa-openapi-router": "^1.1.12",
     "egg": "^2.29.1"
   },
   "devDependencies": {
@@ -79,7 +79,6 @@
   "categories": [
     "Programming Languages"
   ],
-  
   "typings": "typings",
   "files": [
     "app.js",

@@ -11,6 +11,7 @@ export default () => {
         reponse: true,
       },
     },
+    testMode: true,
   };
   const config: PowerPartial<EggAppConfig> = {};
   config.customLogger = {};

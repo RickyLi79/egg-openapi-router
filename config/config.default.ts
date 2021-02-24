@@ -4,6 +4,7 @@ import { IEggOpenapiRouterConfig, OPENAPI_ROUTER_LOGGER } from '../lib/types';
 
 export default (appInfo: EggAppInfo): { openapiRouter: IEggOpenapiRouterConfig } => {
   const openapiRouter: IEggOpenapiRouterConfig = {
+    testMode: false,
     config: {
       controllerDir: '',
       docsDir: path.join(appInfo.baseDir, 'openapi-doc'),
