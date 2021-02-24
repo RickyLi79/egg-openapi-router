@@ -16,6 +16,7 @@ config/**/*.map
 config/**/*.js
 lib/**/*.js
 app.js
+package-lock.json
 
 allure-report/
 allure-results/
