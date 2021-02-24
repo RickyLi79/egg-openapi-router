@@ -1,6 +1,6 @@
 {
   "name": "egg-openapi-router",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "publishConfig": {
     "access": "public"
   },
@@ -82,6 +82,7 @@
   
   "typings": "typings",
   "files": [
+    "app.js",
     "app/**/*.js",
     "config/**/*.js",
     "lib/**/*.js",
