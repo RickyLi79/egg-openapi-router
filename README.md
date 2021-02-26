@@ -101,6 +101,10 @@ module.exports = DefaultController;
 
 > More documentation please visit https://github.com/RickyLi79/koa-openapi-router.
 
+#### Example
+[Here](https://github.com/RickyLi79/openapi-mock-server) is an example for [@rickyli79/json-schema-mock](https://npmjs.org/package/@rickyli79/json-schema-mock) and [egg-openapi-router](https://npmjs.org/package/egg-openapi-router)
+
+
 #### Test Report
 [Allure Report](https://rickyli79.github.io/testing-reports/egg-openapi-router/allure-report/)
 
