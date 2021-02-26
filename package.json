@@ -1,6 +1,6 @@
 {
   "name": "egg-openapi-router",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "publishConfig": {
     "access": "public"
   },
@@ -27,7 +27,7 @@
     "test-local": "egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",
     "cov": "egg-bin cov",
-    "build": "ets -o typings/index.d.ts && tsc -p tsconfig.build.json",
+    "build": "ets clean && ets -o typings/index.d.ts && tsc -p tsconfig.build.json && tsc -p tsconfig.declare.json",
     "clean": "ets clean",
     "ets": "ets -o typings/index.d.ts -w",
     "allure": "npm run allure:test && npm run allure:report",
@@ -83,8 +83,9 @@
   "files": [
     "app.js",
     "app/**/*.js",
+    "app/**/*.d.ts",
     "config/**/*.js",
-    "lib/**/*.js",
+    "config/**/*.d.ts",
     "typings/"
   ]
 }

@@ -21,13 +21,14 @@
     "skipDefaultLibCheck": true,
     // "inlineSourceMap": true,
     "importHelpers": true,
-
+    "declaration": true,
+    "emitDeclarationOnly": true
   },
-  "exclude": [
-    "app/public",
-    "app/views",
-    "node_modules",
-    "./node_modules",
-    "./node_modules/*",
+  "include": [
+    "app/",
+  ],
+  "files": [
+    "config/config.default.ts",
+    "config/types.ts",
   ]
 }

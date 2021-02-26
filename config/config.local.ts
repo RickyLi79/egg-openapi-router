@@ -1,5 +1,5 @@
 import { EggAppConfig, PowerPartial } from 'egg';
-import { IEggOpenapiRouterConfig, OPENAPI_ROUTER_LOGGER } from '../lib/types';
+import { IEggOpenapiRouterConfig, OPENAPI_ROUTER_LOGGER } from './types';
 
 export default () => {
   const openapiRouter: IEggOpenapiRouterConfig = {

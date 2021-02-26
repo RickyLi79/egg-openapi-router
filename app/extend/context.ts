@@ -1,10 +1,13 @@
-import { CTX_OPERATION_SCHEMA, OPENAPI_RQEUST_BODY_SCHEMA, Schema } from '@rickyli79/koa-openapi-router';
+import { OperationSchema, Schema } from '@rickyli79/koa-openapi-router';
 
 export default {
-  oasOperation() {
-    return this[CTX_OPERATION_SCHEMA];
+  oasOperation():OperationSchema {
+    return (this as any).getOperation();
   },
   oasRequestBodySchema():Schema {
-    return this[OPENAPI_RQEUST_BODY_SCHEMA];
+    return (this as any).getRequestBodySchema();
+  },
+  oasRequestQuery():any {
+    return (this as any).getRequestQuery();
   },
 };

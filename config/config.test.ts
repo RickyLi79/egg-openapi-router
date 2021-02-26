@@ -1,6 +1,6 @@
 import { PowerPartial } from '@rickyli79/koa-openapi-router';
 import { EggAppConfig } from 'egg';
-import { IEggOpenapiRouterConfig, OPENAPI_ROUTER_LOGGER } from '../lib/types';
+import { IEggOpenapiRouterConfig, OPENAPI_ROUTER_LOGGER } from './types';
 
 export default () => {
   const openapiRouter: IEggOpenapiRouterConfig = {

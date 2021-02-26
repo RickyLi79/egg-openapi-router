@@ -1,6 +1,6 @@
 import { IOptionalOpenapiRouterConfig, OpenapiRouter } from '@rickyli79/koa-openapi-router';
 import { Application, IBoot } from 'egg';
-import { OPENAPI_ROUTER_LOGGER } from './lib/types';
+import { OPENAPI_ROUTER_LOGGER } from './config/types';
 
 export default class implements IBoot {
 
