@@ -30,15 +30,15 @@ export default class implements IBoot {
       }
     }
     let proxyAction:any|undefined;
-    if (config.proxyAction) {
-      const paths = config.proxyAction.split('/');
+    if (config.options?.proxyAction) {
+      const paths = config.options.proxyAction.split('/');
       proxyAction = <any> this.app.middleware;
       for (const iPath of paths) {
         proxyAction = proxyAction[iPath];
       }
-      proxyAction = this.app.middleware[config.proxyAction];
+      proxyAction = this.app.middleware[config.options.proxyAction];
     }
-    await OpenapiRouter.Start(this.app, configs, { logger, isEggApp: true, proxyAction, testMode: config.testMode });
+    await OpenapiRouter.Start(this.app, configs, { ...config.options, proxyAction, logger });
   }
 
 }

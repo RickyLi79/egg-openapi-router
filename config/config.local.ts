@@ -3,14 +3,13 @@ import { IEggOpenapiRouterConfig, OPENAPI_ROUTER_LOGGER } from '../lib/types';
 
 export default () => {
   const openapiRouter: IEggOpenapiRouterConfig = {
-    config: {
+    options: {
+      testMode: true,
       watcher: { enabled: true },
       validSchema: {
-        request: true,
         reponse: true,
       },
     },
-    testMode: true,
   };
   const config: PowerPartial<EggAppConfig> = {};
   config.customLogger = {};

@@ -1,9 +1,9 @@
-import { IOptionalOpenapiRouterConfig } from '@rickyli79/koa-openapi-router';
+import { IOpenapiRouterOptions, IOptionalOpenapiRouterConfig } from '@rickyli79/koa-openapi-router';
+import { PowerPartial } from 'egg';
 
 export const OPENAPI_ROUTER_LOGGER = 'openapiRouterLogger';
 export type IEggOpenapiRouterConfig = {
-  proxyAction?: string;
   config?: IOptionalOpenapiRouterConfig,
   configs?: { [routerPrefix: string]: IOptionalOpenapiRouterConfig },
-  testMode?: boolean
+  options?: PowerPartial< Omit<IOpenapiRouterOptions, 'proxyAction'> & {proxyAction: string}>,
 };
