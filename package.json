@@ -37,7 +37,7 @@
     "allure:test": "npm run allure:clean && egg-bin test test/**/*.allure.ts"
   },
   "dependencies": {
-    "@rickyli79/koa-openapi-router": "^1.3.0",
+    "@rickyli79/koa-openapi-router": "^1.3.3",
     "egg": "^2.29.1"
   },
   "devDependencies": {
