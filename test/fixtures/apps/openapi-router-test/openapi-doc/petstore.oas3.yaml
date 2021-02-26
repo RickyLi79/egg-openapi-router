@@ -12,7 +12,8 @@ paths:
       summary: List all pets
       operationId: listPets
       tags:
-        - pets
+        - pets      
+      x-controller: pets
       parameters:
         - name: limit
           in: query
@@ -44,6 +45,7 @@ paths:
       operationId: createPets
       tags:
         - pets
+      x-controller: pets
       responses:
         '201':
           description: Null response
@@ -59,6 +61,7 @@ paths:
       operationId: showPetById
       tags:
         - pets
+      x-controller: pets
       parameters:
         - name: petId
           in: path

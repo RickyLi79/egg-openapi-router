@@ -4,6 +4,7 @@
     "title": "my api",
     "version": "1.0.0"
   },
+  "x-controller-folder":"my/tags",
   "paths": {
     "/hello": {
       "get": {
@@ -41,9 +42,7 @@
         }
       },
       "post": {
-        "tags": [
-          "my/tags/greetings"
-        ],
+        "x-controller": "greetings",
         "description": "controller should be 'controller/myTag.ts'",
         "requestBody": {
           "$ref": "#/components/requestBodies/hello"
