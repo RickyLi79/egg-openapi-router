@@ -33,11 +33,11 @@
     "allure": "npm run allure:test && npm run allure:report",
     "allure:clean": "rimraf ./allure-results",
     "allure:debug": " egg-bin test test/debug.ts",
-    "allure:report": "allure generate allure-results --clean -o allure-report && allure open -h localhost -p 5501 allure-report",
+    "allure:report": "allure generate allure-results --clean -o allure-report && allure open -h localhost allure-report",
     "allure:test": "npm run allure:clean && egg-bin test test/**/*.allure.ts"
   },
   "dependencies": {
-    "@rickyli79/koa-openapi-router": "^1.2.1",
+    "@rickyli79/koa-openapi-router": "^1.3.0",
     "egg": "^2.29.1"
   },
   "devDependencies": {
